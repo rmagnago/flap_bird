@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flap_bird/components/background.dart';
 import 'package:flap_bird/components/ground.dart';
 import 'package:flap_bird/components/bird.dart';
+import 'package:flap_bird/components/pipe_group.dart';
 
 class FlappyBirdGame extends FlameGame {
   late Bird bird;
@@ -12,6 +13,7 @@ class FlappyBirdGame extends FlameGame {
       Background(),
       Ground(),
       bird = Bird(),
+      PipeGroup(),
       ]);
   }
 }
