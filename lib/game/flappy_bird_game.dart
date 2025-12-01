@@ -10,6 +10,7 @@ import 'package:flap_bird/game/conifguration.dart';
 class FlappyBirdGame extends FlameGame with TapDetector {
   late Bird bird;
   Timer interval = Timer(Config.pipeInterval, repeat: true);
+  bool isGameOver = false;
 
   @override
   Future<void> onLoad() async {
