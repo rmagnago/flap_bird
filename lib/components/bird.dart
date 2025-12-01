@@ -12,6 +12,8 @@ class Bird extends SpriteGroupComponent<BirdMovement>
     with HasGameRef<FlappyBirdGame>, CollisionCallbacks {
   Bird();
 
+  int score = 0;
+
   @override
   Future<void> onLoad() async {
     final birdMidFlap = await gameRef.loadSprite(Assets.birdMidFlap);
