@@ -10,6 +10,8 @@ class Ground extends ParallaxComponent<FlappyBirdGame>
     with HasGameRef<FlappyBirdGame> {
   Ground();
 
+  RectangleHitbox? _collider;
+
   @override
   Future<void> onLoad() async {
     final ground = await Flame.images.load(Assets.ground);
@@ -17,12 +19,20 @@ class Ground extends ParallaxComponent<FlappyBirdGame>
       ParallaxLayer(ParallaxImage(ground, fill: LayerFill.none)),
     ]);
 
-    add(
-      RectangleHitbox(
-        position: Vector2(0, gameRef.size.y - Config.groundHeight),
-        size: Vector2(gameRef.size.x, Config.groundHeight),
-      ),
-    );
+    // Cria o collider, dimensões corretas serão aplicadas em onGameResize
+    _collider = RectangleHitbox();
+    add(_collider!);
+  }
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+    // Garante que o hitbox acompanha o tamanho real do jogo
+    if (_collider != null) {
+      _collider!
+        ..position = Vector2(0, size.y - Config.groundHeight)
+        ..size = Vector2(size.x, Config.groundHeight);
+    }
   }
 
   @override

@@ -2,11 +2,12 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flap_bird/game/assets.dart';
+import 'package:flap_bird/components/ground.dart';
+import 'package:flap_bird/components/pipe.dart';
 import 'package:flap_bird/game/bird_moviment.dart';
 import 'package:flap_bird/game/conifguration.dart';
 import 'package:flap_bird/game/flappy_bird_game.dart';
 import 'package:flutter/animation.dart';
-import 'package:flutter/rendering.dart';
 
 class Bird extends SpriteGroupComponent<BirdMovement>
     with HasGameRef<FlappyBirdGame>, CollisionCallbacks {
@@ -52,7 +53,10 @@ class Bird extends SpriteGroupComponent<BirdMovement>
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoints, other);
-    debugPrint('Colidiu');
+    // Game over ao colidir com chão ou tubos
+    if (other is Ground || other is Pipe) {
+      gameOver();
+    }
   }
 
   void reset() {
