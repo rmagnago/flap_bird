@@ -21,13 +21,16 @@ class Bird extends SpriteGroupComponent<BirdMovement>
     final birdUpFlap = await gameRef.loadSprite(Assets.birdUpFlap);
 
     size = Vector2(50, 40);
-    current = BirdMovement.middle;
-    position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
+
     sprites = {
       BirdMovement.middle: birdMidFlap,
       BirdMovement.up: birdUpFlap,
       BirdMovement.down: birdDownFlap,
     };
+
+    current = BirdMovement.middle;
+
+    position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
 
     add(CircleHitbox());
   }
@@ -44,7 +47,10 @@ class Bird extends SpriteGroupComponent<BirdMovement>
   }
 
   @override
-  void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
+  void onCollisionStart(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
     super.onCollisionStart(intersectionPoints, other);
     debugPrint('Colidiu');
   }
